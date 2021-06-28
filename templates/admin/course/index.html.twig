@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration des courses{% endblock %}
+
+{% block body %}
+<h1 class="text-center m-5">Page d'administration des courses</h1>
+    {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+    {% endfor %}
+<a href="{{path('admin_ajouter_course')}}" class="btn btn-success"><i class="fas fa-plus"></i></a>
+<table class = "table text-center">
+    <thead>
+        <tr>
+            <th>Circuit Adulte</th>
+            <th>Circuit Enfant</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        {% for course in courses %}
+        <!-- Mettre le nombre de place restantes-->
+            <td>Nombre de place : {{course.nb_places}} </td>
+        <!-- Mettre le nombre de personnes en liste d'attente -->
+        {% endfor %}
+        </tr>
+        <tr>
+        {% for course in courses %}
+            <td>Date de la course : {{course.date | date("d/m/y")}} </td>
+        {% endfor %}
+        </tr>
+        <tr>
+        {% for course in courses %}
+            <td><a href="{{path('admin_consulter_participants', {course : course.id})}}" class="btn btn-info">Participants inscrits</a></td>
+        {% endfor %}
+        </tr>
+        <tr>
+        {% for course in courses %}
+            <td><a href="{{path('admin_reporter_course',{course : course.id})}}" class="btn btn-warning">Reporter les courses</a></td>
+        {% endfor %}
+        </tr>
+    </tbody>
+</table>
+<!-- ajout de l'adresse générée pour partager notre contenu -->
+<div class="row">
+  
+
+        <a class="btn btn-info col-3 lien-partage offset-2" href="https://www.facebook.com/sharer/sharer.php?u=https%3A//karac.ch/blog/bouton_partage_personnalise">
+            <span class="fb-icon">
+            Partager cette course <i class="fab fa-facebook-square"></i>
+            </span> 
+        </a>
+
+         <a class="btn btn-info col-3 lien-partage offset-2" href="https://www.facebook.com/sharer/sharer.php?u=https%3A//karac.ch/blog/bouton_partage_personnalise">
+            <span class="fb-icon">
+            Partager cette course <i class="fab fa-facebook-square"></i>
+            </span> 
+        </a>
+    
+</div>
+
+
+{% endblock %}
